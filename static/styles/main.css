@@ -1,0 +1,52 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  background-image: url('../images/karol.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/*--- Landing Page CSS ---*/
+ *
+.description {
+  left: 50%;
+  position: absolute;
+  top: 45%;
+  transform: translate(-50%, -55%);
+  text-align: center;
+}
+
+.description h1 {
+  color: #f8f7fa;
+}
+
+.description p {
+  color: #f7faff;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+/*--- Navigation Bar CSS ---*/
+
+.navbar {
+  background: #595578
+}
+
+.nav-link,
+.navbar-brand {
+  color: #f8f7fa;
+  cursor: pointer;
+}
+
+.nav-link {
+  margin-right: 1em !important;
+}
+
+
+.navbar-collapse {
+  justify-content: flex-end;
+}
