@@ -20,7 +20,8 @@ def plot_stock(stock_symbol,month):
     month_list = month.split('-')
     month_list[2]='01'
     start_date = '-'.join(month_list)
-    end_month = str(int(month_list[1])+1).zfill(2)
+    end_month_int = int(month_list[1]) if int(month_list[1])<=12 else int(month_list[1])%12
+    end_month = str(end_month_int).zfill(2)
     month_list[1]=end_month
     end_date = '-'.join(month_list)
     stockrequest = requests.get('https://www.quandl.com/api/v3/datasets/WIKI/{}/data.json'.format(stock_symbol),
