@@ -12,8 +12,9 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-2.0.1.min.css">
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.0.1.min.css">
     <link rel="stylesheet" href="{{ url_for('static',filename='styles/main.css')}}">
-    <link type="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-md">
@@ -36,36 +37,46 @@
       </div>
     </nav>
     <header class="page-header header container-fluid">
-      <div class="overlay">
-	  <div class="container">
-	     <div class="row">
-		  <div class="description">
-		      <h1>Hello! Welcome to my Stock Data Analyzer!</h1>
-		      <p>This is a simple flask application for analyzing stocks</p>
-		  </div>
-	     </div>
-	     <div class="row">
+	 <div class="overlay">
+	 <div class="container">
+	   <div class="row justify-content-sm-center">
+	       <div class="col-sm-auto">
 		  <form method="post">
 	            {{ form.csrf_token() }}
 		    <div class="form-group">
 		      {{ wtf.form_field(form.stock_ticker, class='form-control') }}
-                      {{ wtf.form_field(form.month, class='form-control datepicker') }}
+                      {{ wtf.form_field(form.month, class='form-control') }}
 		    </div>
 		    <div class="form-group">
 		      <button type="submit" class="btn btn-primary">Submit</button>
 		    </div>
 		  </form>
-	     </div>
-	  </div>
-      </div>
+		</div>
+	   </div>
+	  {% if stockEntered  %}
+	  <div class="row justify-content-md-center">
+           <div class="col-md-auto">
+            <div class="card bg-dark rounded mb-0">
+	      <div class="card-header text-center rounded mb-0">Stock Prices</div>
+	      <div class="card-body justify-content-md-center rounded mb-0" align="center">
+	        {{ script|safe }}
+	        {{ div|safe }}
+	      </div>
+	    </div>
+	   </div>
+          </div>
+	  {% endif  %}
+	</div>
+	</div>
     </header>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script src="{{ url_for('static',filename='javascript/main.js')}}"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-2.0.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   </body>
 </html>
