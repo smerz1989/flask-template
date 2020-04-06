@@ -9,6 +9,7 @@ import pandas as pd
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
 from bokeh.models import ColumnDataSource, HoverTool, PrintfTickFormatter
+from datetime import strptime, strftime
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -17,6 +18,7 @@ Bootstrap(app)
 datepicker(app)
 
 def plot_stock(stock_symbol,month):
+    """
     month_list = month.split('-')
     month_list[2]='01'
     start_date = '-'.join(month_list)
@@ -24,9 +26,12 @@ def plot_stock(stock_symbol,month):
     end_month = str(end_month_int).zfill(2)
     month_list[1]=end_month
     end_date = '-'.join(month_list)
+    """
+    start_date = strptime(month,'%Y-%m-%d')
+    end_date = start_date+datetime.timedelta(months=1)
     stockrequest = requests.get('https://www.quandl.com/api/v3/datasets/WIKI/{}/data.json'.format(stock_symbol),
-          params={'start_date':start_date,
-                  'end_date':end_date,
+          params={'start_date':start_date.strftime("%Y-%m-%d"),
+                  'end_date':end_date.strftime("%Y-%m-%d"),
                   'api_key': app.config['API_KEY'],
                   })
 
