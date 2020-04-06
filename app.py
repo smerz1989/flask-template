@@ -44,7 +44,7 @@ def plot_stock(stock_symbol,month):
     p = figure(title="Stock Price for {}".format(stock_symbol),x_axis_type='datetime',tools=[hover_tool])
     p.xaxis.axis_label='Date'
     p.x_range.range_padding = chart_inner_left_padding
-    p.yaxis.axis_label = 'Open Price ($)'
+    p.yaxis.axis_label = 'Close Price ($)'
     p.yaxis.axis_label_standoff = default_padding
     p.xaxis.axis_label_standoff = default_padding
     p.xgrid.visible = False
