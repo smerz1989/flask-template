@@ -30,7 +30,7 @@ def plot_stock(stock_symbol,month):
                   })
 
     if stockrequest.status_code!=200:
-        raise requests.RequestException("Quandl did not respond correctly\nStatus Code {}\nURL {}\nJSON {}".format(response.status_code,response.url,response.json()))
+        raise requests.RequestException("Quandl did not respond correctly\nStatus Code {}\nURL {}\nJSON {}".format(stockrequest.status_code,stockrequest.url,stockrequest.json()))
     stock_json = stockrequest.json()["dataset_data"] 
     default_padding=30
     chart_inner_left_padding=0.015
