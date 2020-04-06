@@ -20,15 +20,6 @@ Bootstrap(app)
 datepicker(app)
 
 def plot_stock(stock_symbol,month):
-    """
-    month_list = month.split('-')
-    month_list[2]='01'
-    start_date = '-'.join(month_list)
-    end_month_int = int(month_list[1]) if int(month_list[1])<=12 else int(month_list[1])%12
-    end_month = str(end_month_int).zfill(2)
-    month_list[1]=end_month
-    end_date = '-'.join(month_list)
-    """
     start_date = datetime.strptime(month,'%Y-%m-%d')
     end_date = start_date+relativedelta(months=1)
     stockrequest = requests.get('https://www.quandl.com/api/v3/datasets/WIKI/{}/data.json'.format(stock_symbol),
@@ -47,7 +38,7 @@ def plot_stock(stock_symbol,month):
     df['DateTime']=pd.to_datetime(df['Date'],unit='ns')
     csource = ColumnDataSource(df)
     hover_tool = HoverTool(
-            tooltips=[('Open Price ($)', '@Open'), ('Date', '@Date')],
+            tooltips=[('Close Price ($)', '@Close'), ('Date', '@Date')],
                       mode='vline'
                 )
     p = figure(title="Stock Price for {}".format(stock_symbol),x_axis_type='datetime',tools=[hover_tool])
@@ -58,7 +49,7 @@ def plot_stock(stock_symbol,month):
     p.xaxis.axis_label_standoff = default_padding
     p.xgrid.visible = False
     p.ygrid.visible = False
-    p.line(x='DateTime',y='Open',source=csource,line_width=2)
+    p.line(x='DateTime',y='Close',source=csource,line_width=2)
     return p
 
 @app.route('/',methods=['GET','POST'])
