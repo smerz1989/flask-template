@@ -35,6 +35,7 @@ def plot_stock(stock_symbol,month):
     default_padding=30
     chart_inner_left_padding=0.015
     df = pd.DataFrame(stock_json["data"],columns=stock_json["column_names"])
+    print(df)
     df['DateTime']=pd.to_datetime(df['Date'],unit='ns')
     csource = ColumnDataSource(df)
     hover_tool = HoverTool(
@@ -52,8 +53,6 @@ def plot_stock(stock_symbol,month):
     p.line(x='DateTime',y='Open',source=csource,line_width=2)
     return p
 
-
-
 @app.route('/',methods=['GET','POST'])
 def index():
   form = StockForm(request.form)
@@ -62,6 +61,7 @@ def index():
   if request.method == 'POST':
       month = request.form['month']
       plot = plot_stock(request.form['stock_ticker'],month)
+      print(plot)
       script, div = components(plot)
       return render_template('graph.html',stockEntered=True,form=form,script=script,div=div,ticker=request.form['stock_ticker'])
 
