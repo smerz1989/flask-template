@@ -10,7 +10,7 @@ Flask-Datepicker==0.12
 Flask-WTF==0.14.3
 idna==2.9
 itsdangerous==1.1.0
-Jinja2==2.11.1
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 numpy==1.18.2
 packaging==20.3
